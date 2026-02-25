@@ -11,19 +11,9 @@ on:
 
 jobs:
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - { target: linux-64,  os: ubuntu-latest }
-          - { target: osx-arm64, os: macos-14 }
-          - { target: osx-64,    os: macos-13 }
-          - { target: win-64,    os: windows-latest }
-
-    runs-on: ${{ matrix.os }}
-
+    runs-on: ubuntu-latest
     permissions:
-      id-token: write   # required for OIDC trusted publishing
+      id-token: write
       contents: read
 
     steps:
@@ -31,23 +21,18 @@ jobs:
 
       - uses: prefix-dev/setup-pixi@v0.8.8
         with:
-          cache: true
+          cache: false
 
       - name: Build all recipes
-        shell: bash
-        env:
-          TARGET_PLATFORM: ${{ matrix.target }}
         run: |
           pixi run rattler-build build \
             --recipe-dir recipes/ \
             --skip-existing=all \
-            --target-platform "$TARGET_PLATFORM" \
             -c conda-forge \
             -c https://prefix.dev/animaltracking
 
       - name: Upload packages
         if: github.event_name != 'pull_request'
-        shell: bash
         run: |
           for pkg in $(find output -type f \( -name "*.conda" -o -name "*.tar.bz2" \)); do
             echo "Uploading $pkg"
