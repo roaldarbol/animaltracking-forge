@@ -10,12 +10,19 @@ source:
   rev: cc809c7fc28a5b770cec6a9e1dc22208d2d500bd
 
 build:
-  number: 1
+  number: 2
   script:
     - pip install . --no-deps --no-build-isolation
-    - mkdir -p "${PREFIX}/Menu"
-    - cp "${RECIPE_DIR}/menu.json" "${PREFIX}/Menu/behaveai_menu.json"
-    # - cp "${RECIPE_DIR}/behaveai.png" "${PREFIX}/Menu/behaveai.png"
+    - if: unix
+      then:
+        - mkdir -p "$PREFIX/Menu"
+        - cp "$RECIPE_DIR/menu.json" "$PREFIX/Menu/behaveai_menu.json"
+        # - cp "$RECIPE_DIR/behaveai.png" "$PREFIX/Menu/behaveai.png" # Wait until we have an icon
+    - if: win
+      then:
+        - if not exist "%PREFIX%\Menu" mkdir "%PREFIX%\Menu"
+        - copy "%RECIPE_DIR%\menu.json" "%PREFIX%\Menu\behaveai_menu.json"
+        # - copy "%RECIPE_DIR%\behaveai.png" "%PREFIX%\Menu\behaveai.png" # Wait until we have an icon
 
 requirements:
   host:
