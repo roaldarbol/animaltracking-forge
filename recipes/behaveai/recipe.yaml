@@ -10,7 +10,11 @@ source:
   rev: cc809c7fc28a5b770cec6a9e1dc22208d2d500bd
 
 build:
-  script: pip install . --no-deps --no-build-isolation
+  script:
+    - pip install . --no-deps --no-build-isolation
+    - mkdir -p "${PREFIX}/Menu"
+    - cp "${RECIPE_DIR}/menu.json" "${PREFIX}/Menu/behaveai_menu.json"
+    # - cp "${RECIPE_DIR}/behaveai.png" "${PREFIX}/Menu/behaveai.png"
 
 requirements:
   host:
