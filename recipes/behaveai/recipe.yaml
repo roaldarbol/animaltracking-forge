@@ -1,0 +1,33 @@
+package:
+  name: behaveai
+  version: "1.2.1"
+
+source:
+  git: https://github.com/roaldarbol/BehaveAI
+  tag: v{{ version }}
+
+build:
+  script: pip install . --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python >=3.9
+    - pip
+    - hatchling
+  run:
+    - python >=3.9
+    - numpy
+    - pillow
+    - scipy
+    - tqdm
+    - ultralytics
+    - pyyaml
+    - py-opencv        # opencv-python -> py-opencv on conda-forge
+    - pytorch          # torch -> pytorch on conda-forge
+    - torchvision
+    - click
+
+about:
+  summary: Animal tracking and behaviour classification using YOLO and motion analysis
+  license: AGPL-3.0-or-later
+  license_file: LICENSE

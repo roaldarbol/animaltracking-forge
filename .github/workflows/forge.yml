@@ -1,0 +1,56 @@
+name: Build and publish all packages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { target: linux-64,  os: ubuntu-latest }
+          - { target: osx-arm64, os: macos-14 }
+          - { target: osx-64,    os: macos-13 }
+          - { target: win-64,    os: windows-latest }
+
+    runs-on: ${{ matrix.os }}
+
+    permissions:
+      id-token: write   # required for OIDC trusted publishing
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: prefix-dev/rattler-build-action@v0.2.34
+        with:
+          rattler-build-version: latest
+
+      - name: Build all recipes
+        shell: bash
+        env:
+          TARGET_PLATFORM: ${{ matrix.target }}
+        run: |
+          rattler-build build \
+            --recipe-dir recipes/ \
+            --skip-existing=all \
+            --target-platform "$TARGET_PLATFORM" \
+            -c conda-forge \
+            -c https://prefix.dev/animaltracking
+
+      - name: Upload packages
+        # skip on PRs — build only, no publish
+        if: github.event_name != 'pull_request'
+        shell: bash
+        run: |
+          for pkg in $(find output -type f \( -name "*.conda" -o -name "*.tar.bz2" \)); do
+            echo "Uploading $pkg"
+            rattler-build upload prefix -c animaltracking "$pkg"
+          done
