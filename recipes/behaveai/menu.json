@@ -6,7 +6,6 @@
       "name": "BehaveAI",
       "description": "Animal tracking and behaviour classification using YOLO and motion analysis",
       "command": ["{{ PREFIX }}/bin/behaveai"],
-    //   "icon": "{{ MENU_DIR }}/behaveai.png",
       "platforms": {
         "linux": {
           "command": ["{{ PREFIX }}/bin/behaveai"],
