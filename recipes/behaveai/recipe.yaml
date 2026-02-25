@@ -10,7 +10,8 @@ source:
   rev: cc809c7fc28a5b770cec6a9e1dc22208d2d500bd
 
 build:
-  number: 2
+  number: 3
+  noarch: python
   script:
     - pip install . --no-deps --no-build-isolation
     - if: unix
