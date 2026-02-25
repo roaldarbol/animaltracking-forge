@@ -7,10 +7,10 @@ package:
 
 source:
   git: https://github.com/roaldarbol/BehaveAI
-  rev: 49cbba459a52b49b11f9fd0cbde87333f2e4d424
+  rev: 637009fb3f3be1d9c62df69c6a27c130a5a30b29
 
 build:
-  number: 6
+  number: 7
   noarch: python
   python:
     entry_points:
