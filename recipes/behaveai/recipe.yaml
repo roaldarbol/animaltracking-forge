@@ -10,6 +10,7 @@ source:
   rev: cc809c7fc28a5b770cec6a9e1dc22208d2d500bd
 
 build:
+  number: 1
   script:
     - pip install . --no-deps --no-build-isolation
     - mkdir -p "${PREFIX}/Menu"
