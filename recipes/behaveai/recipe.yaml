@@ -1,10 +1,13 @@
+context:
+  version: "1.2.1"
+
 package:
   name: behaveai
-  version: "1.2.1"
+  version: ${{ version }}
 
 source:
   git: https://github.com/roaldarbol/BehaveAI
-  tag: v{{ version }}
+  tag: v${{ version }}
 
 build:
   script: pip install . --no-deps --no-build-isolation
@@ -22,8 +25,8 @@ requirements:
     - tqdm
     - ultralytics
     - pyyaml
-    - py-opencv        # opencv-python -> py-opencv on conda-forge
-    - pytorch          # torch -> pytorch on conda-forge
+    - py-opencv
+    - pytorch
     - torchvision
     - click
 
