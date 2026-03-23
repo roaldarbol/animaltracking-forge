@@ -10,11 +10,11 @@ source:
   rev: d68f6a2896faa41d6f93132114142f5348bf78c4
 
 build:
-  number: 9
+  number: 10
   noarch: python
   python:
     entry_points:
-      - behaveai = behaveai.cli:cli
+      - behaveai = behaveai.cli:app
   script:
     - pip install . --no-deps --no-build-isolation
     - if: unix
