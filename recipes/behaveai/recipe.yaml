@@ -7,7 +7,7 @@ package:
 
 source:
   git: https://github.com/roaldarbol/BehaveAI
-  rev: fe2724b96924f125bb02503daff319077d4f2557
+  rev: d68f6a2896faa41d6f93132114142f5348bf78c4
 
 build:
   number: 1
