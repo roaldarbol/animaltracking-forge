@@ -10,7 +10,7 @@ source:
   rev: d68f6a2896faa41d6f93132114142f5348bf78c4
 
 build:
-  number: 1
+  number: 8
   noarch: python
   python:
     entry_points:
