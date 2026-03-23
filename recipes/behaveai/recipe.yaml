@@ -10,7 +10,7 @@ source:
   rev: d68f6a2896faa41d6f93132114142f5348bf78c4
 
 build:
-  number: 8
+  number: 9
   noarch: python
   python:
     entry_points:
@@ -44,7 +44,7 @@ requirements:
     - py-opencv
     - pytorch
     - torchvision
-    - click
+    - typer
 
 about:
   summary: Animal tracking and behaviour classification using YOLO and motion analysis
